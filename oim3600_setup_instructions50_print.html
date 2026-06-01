@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OIM 3600 — Computer Setup Instructions</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+    :root {
+      --bg: #ffffff;
+      --surface: #ffffff;
+      --surface2: #f5f5f5;
+      --border: #aaaaaa;
+      --accent: #000000;
+      --text: #111111;
+      --text-muted: #444444;
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'IBM Plex Sans', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 860px; margin: 0 auto; }
+    header {
+      border-left: 4px solid var(--accent);
+      padding-left: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    header h1 { font-size: 1.8rem; font-weight: 700; color: var(--accent); letter-spacing: -0.5px; }
+    header p  { color: var(--text-muted); font-size: 0.95rem; margin-top: 0.3rem; }
+
+    .alert {
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+      border-left: 4px solid #555555;
+      background: #ffffff;
+      color: #111111;
+    }
+    .alert strong { display: block; margin-bottom: 0.4rem; font-size: 1rem; }
+    .alert ul { margin-left: 1.2rem; margin-top: 0.4rem; }
+    .alert li { margin-bottom: 0.25rem; }
+
+    .phase-banner {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: #111111;
+      color: #ffffff;
+      border-radius: 8px;
+      padding: 0.85rem 1.5rem;
+      margin: 2.5rem 0 1.5rem 0;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.3px;
+    }
+    .phase-banner span { font-size: 1.2rem; }
+
+    .step {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      overflow: hidden;
+    }
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+    }
+    .step-number {
+      background: #111111;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.8rem;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-title { font-weight: 700; font-size: 1.05rem; }
+    .step-body  { padding: 1.25rem 1.5rem; }
+    .step-body ol, .step-body ul { margin-left: 1.4rem; }
+    .step-body li { margin-bottom: 0.4rem; }
+    .step-body p  { margin-bottom: 0.75rem; }
+
+    code {
+      font-family: var(--mono);
+      background: #f0f0f0;
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+      padding: 0.1em 0.4em;
+      font-size: 0.9em;
+    }
+    pre {
+      font-family: var(--mono);
+      background: #f0f0f0;
+      border: 1px solid #cccccc;
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      font-size: 0.88rem;
+      margin: 0.75rem 0;
+      white-space: pre-wrap;
+    }
+    .callout {
+      background: #f9f9f9;
+      border-left: 3px solid #888;
+      border-radius: 0 6px 6px 0;
+      padding: 0.75rem 1rem;
+      margin: 0.75rem 0;
+      font-size: 0.92rem;
+    }
+    .callout.warn  { border-color: #c00; }
+    .callout.info  { border-color: #444; }
+    .callout.ok    { border-color: #2a7a2a; }
+    .callout strong { font-weight: 700; }
+
+    .faq { margin-top: 3rem; }
+    .faq h2 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 2px solid #ccc; }
+    .faq-item { margin-bottom: 1.5rem; }
+    .faq-item .q { font-weight: 700; margin-bottom: 0.3rem; }
+    .faq-item .a { color: var(--text-muted); font-size: 0.94rem; }
+
+    footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #ddd; color: var(--text-muted); font-size: 0.88rem; text-align: center; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>OIM 3600 — Computer Setup Instructions</h1>
+    <p>Fall 2026 &nbsp;·&nbsp; Babson College &nbsp;·&nbsp; Complete all steps before the first class</p>
+  </header>
+
+  <div class="alert">
+    <strong>⚠ Read This Before You Start</strong>
+    <ul>
+      <li>Follow every step in the exact order shown — do not skip ahead</li>
+      <li>Your GitHub username must be all lowercase in this format: <code>firstname-fall2026</code> (example: <code>alex-fall2026</code>)</li>
+      <li>Use your Babson email address for everything</li>
+      <li>If you already have a GitHub account, you must create a new one for this class</li>
+      <li>If you get stuck at any step, email your instructor before class — do not wait</li>
+    </ul>
+  </div>
+
+  <!-- PHASE BANNER: BEFORE CLASS -->
+  <div class="phase-banner">
+    <span>🏠</span> Do These Steps Before the First Class
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">1</div>
+      <div class="step-title">Create Your GitHub Account</div>
+    </div>
+    <div class="step-body">
+      <p>You need a GitHub account specifically for this class. Do this first — before anything else.</p>
+      <ol>
+        <li>Go to <strong>https://github.com/join</strong> in your browser</li>
+        <li>For <strong>Username</strong>: use your first name followed by <code>-fall2026</code> — all lowercase, no spaces<br>
+            Example: if your name is Alex Smith, your username is <code>alex-fall2026</code></li>
+        <li>For <strong>Email address</strong>: use your Babson email (example: <code>asmith26@babson.edu</code>)</li>
+        <li>For <strong>Password</strong>: choose a strong password and write it down somewhere safe</li>
+        <li>Complete any verification puzzle GitHub shows you and click <strong>Create account</strong></li>
+        <li>GitHub will send a verification code to your Babson email — find the code and enter it on the GitHub page</li>
+      </ol>
+      <div class="callout warn">
+        🚨 The username format must be exact: all lowercase, first name only, hyphen, then <code>-fall2026</code>.
+        Examples: <code>alex-fall2026</code>, <code>maria-fall2026</code>, <code>james-fall2026</code>.
+        Do not use your last name, initials, numbers, or dots.
+      </div>
+      <div class="callout ok">
+        ✅ Once your account is created, email your instructor with your GitHub username, full name, and Babson email address. Your instructor needs this to add you to the course.
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">2</div>
+      <div class="step-title">Create the PythonClass Folder</div>
+    </div>
+    <div class="step-body">
+      <ol>
+        <li>Press the <strong>Windows key</strong> on your keyboard (bottom-left, looks like a flag)</li>
+        <li>Type <strong>File Explorer</strong> and press Enter</li>
+        <li>In the left panel, click <strong>This PC</strong></li>
+        <li>Double-click <strong>Local Disk (C:)</strong> to open the C: drive</li>
+        <li>Right-click on any empty white space in the folder area</li>
+        <li>Click <strong>New → Folder</strong></li>
+        <li>Type exactly: <code>PythonClass</code> — then press Enter</li>
+      </ol>
+      <div class="callout warn">
+        🚨 The folder name must be typed exactly as shown: capital <strong>P</strong>, lowercase <em>ython</em>,
+        capital <strong>C</strong>, lowercase <em>lass</em>. Do not add spaces or use all lowercase.
+        The full path must be <code>C:\PythonClass</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">3</div>
+      <div class="step-title">Download the Setup Files from Canvas</div>
+    </div>
+    <div class="step-body">
+      <ol>
+        <li>Log into Canvas at <strong>canvas.babson.edu</strong></li>
+        <li>Open the <strong>OIM 3600</strong> course</li>
+        <li>Click <strong>Files</strong> in the left menu</li>
+        <li>Find the file named <code>PythonClass-Setup.zip</code> and download it</li>
+        <li>When the download appears in your browser, click the folder icon or <strong>Show in folder</strong> to find it — it will be in your Downloads folder</li>
+      </ol>
+      <div class="callout info">
+        ℹ Do <strong>not</strong> open the zip yet — you must unblock it first (Step 4).
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">4</div>
+      <div class="step-title">Unblock the Zip File, Then Extract</div>
+    </div>
+    <div class="step-body">
+      <p>Windows automatically blocks files downloaded from the internet. You must unblock the zip <strong>before</strong> extracting it — this is the easiest way to ensure all extracted files are trusted.</p>
+      <ol>
+        <li>Open File Explorer and navigate to your <strong>Downloads</strong> folder</li>
+        <li>Right-click on <code>PythonClass-Setup.zip</code> → click <strong>Properties</strong></li>
+        <li>At the very bottom of the Properties window you will see:<br>
+            <em>"This file came from another computer..."</em> with a checkbox labeled <strong>Unblock</strong></li>
+        <li>Check the <strong>Unblock</strong> box so a checkmark appears</li>
+        <li>Click <strong>Apply</strong> then click <strong>OK</strong></li>
+        <li>Now right-click the zip again → click <strong>Extract All...</strong></li>
+        <li>In the dialog, type <code>C:\PythonClass</code> as the destination folder</li>
+        <li>Click <strong>Extract</strong></li>
+      </ol>
+      <div class="callout ok">
+        ✅ Because you unblocked the zip first, all extracted files are automatically unblocked.
+        You do not need to unblock each file individually.
+      </div>
+      <div class="callout warn">
+        ⚠ If you do not see the Unblock checkbox, the file is already unblocked — this is fine, continue to Step 5.
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">5</div>
+      <div class="step-title">Run Phase 1 — Install Software (as Administrator)</div>
+    </div>
+    <div class="step-body">
+      <div class="callout warn">
+        🚨 This step must be run as Administrator. If you are on a school-managed computer
+        and cannot run as Administrator, contact Babson IT Services or email your instructor before proceeding.
+      </div>
+      <ol>
+        <li>Press the <strong>Windows key</strong></li>
+        <li>Type <strong>Windows PowerShell</strong> — do not press Enter yet</li>
+        <li>In the search results, right-click on <strong>Windows PowerShell</strong></li>
+        <li>Click <strong>Run as Administrator</strong></li>
+        <li>A window will pop up asking "Do you want to allow this app to make changes?" — click <strong>Yes</strong></li>
+        <li>A blue PowerShell window will open. Type the following command and press Enter:
+          <pre>cd C:\PythonClass</pre>
+        </li>
+        <li>Type the following command and press Enter:
+          <pre>Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass</pre>
+        </li>
+        <li>Type the following command and press Enter:
+          <pre>.\setup50.ps1</pre>
+        </li>
+        <li>The script will now install software. This may take 10–20 minutes. <strong>Do not close the window.</strong></li>
+        <li>When you see <strong>PHASE 1 COMPLETE</strong> on the screen, close this PowerShell window.</li>
+        <li><strong>Restart your computer</strong> before continuing to Step 6. This ensures all installed software is available.</li>
+      </ol>
+      <div class="callout warn">
+        ⚠ Do not close the window while software is installing. If the window closes on its own with an error,
+        take a screenshot and email your instructor.
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 6 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">6</div>
+      <div class="step-title">Run Phase 2 — Configure Your Environment</div>
+    </div>
+    <div class="step-body">
+      <div class="callout info">
+        ℹ This step uses PowerShell 7 (different from Step 5). Do <strong>not</strong> run as Administrator this time — open it as a normal user.
+      </div>
+      <ol>
+        <li>Press the <strong>Windows key</strong></li>
+        <li>Type <code>pwsh</code> (not PowerShell — type exactly: <code>pwsh</code>) and press Enter</li>
+        <li>A dark blue PowerShell 7 window will open. Type this command and press Enter:
+          <pre>cd C:\PythonClass</pre>
+        </li>
+        <li>Type this command and press Enter:
+          <pre>.\setup50.ps1</pre>
+        </li>
+        <li>The script will ask: <em>"Enter your first name (letters only)"</em><br>
+            Type only your first name in all lowercase letters — no capital letters, no spaces, no numbers, no dots<br>
+            Example: if your name is Alex, type <code>alex</code> and press Enter</li>
+        <li>The script will show your GitHub username in a green box — confirm it matches the username you created in Step 1</li>
+        <li>A browser window will open asking you to sign into GitHub — sign in with the account you created in Step 1</li>
+        <li>Click <strong>Authorize</strong> if prompted</li>
+        <li>Come back to PowerShell — the script will continue installing VS Code extensions. Do not close the window.</li>
+        <li>When you see <strong>PHASE 2 COMPLETE</strong>, the setup is done</li>
+      </ol>
+      <div class="callout ok">
+        ✅ Phase 2 complete — stop here. The remaining steps will be completed during the first class session.
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE BANNER: IN CLASS -->
+  <div class="phase-banner">
+    <span>🏫</span> Complete These Steps During the First Class
+  </div>
+
+  <!-- STEP 7 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">7</div>
+      <div class="step-title">Accept the GitHub Organization Invitation</div>
+    </div>
+    <div class="step-body">
+      <p>Your instructor will add you to the course GitHub organization before class. You will receive an email invitation from GitHub.</p>
+      <ol>
+        <li>Check your Babson email for an invitation from GitHub to join <strong>Babson-Python-Fall2026</strong></li>
+        <li>Click the <strong>Accept invitation</strong> button in the email — this will open GitHub in your browser</li>
+        <li>Click <strong>Join Babson-Python-Fall2026</strong> to confirm</li>
+      </ol>
+      <div class="callout info">
+        ℹ If you already accepted the invitation email before class, you can skip this step.
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 8 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">8</div>
+      <div class="step-title">Accept the Course Assignment</div>
+    </div>
+    <div class="step-body">
+      <p>This command creates your personal private copy of the course repository.</p>
+      <ol>
+        <li>Open a PowerShell 7 window (press Start, type <code>pwsh</code>, press Enter)</li>
+        <li>Type the following command and press Enter:
+          <pre>gh student accept Babson-Python-Fall2026 oim3600 intro</pre>
+        </li>
+        <li>When it finishes, it will print a <code>git clone</code> command — you do <strong>not</strong> need to run that command; <code>sync50.ps1</code> handles this for you</li>
+      </ol>
+      <div class="callout warn">
+        🚨 If you see an error saying "no membership found", you have not accepted the org invitation yet.
+        Complete Step 7 first, then try this command again.
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 9 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">9</div>
+      <div class="step-title">Open VS Code and Run sync50.ps1</div>
+    </div>
+    <div class="step-body">
+      <ol>
+        <li>Look on your Desktop for a shortcut named <strong>OIM3600</strong></li>
+        <li>Double-click the <strong>OIM3600</strong> shortcut — this opens Visual Studio Code</li>
+        <li>In VS Code, open the Terminal by clicking the <strong>View</strong> menu at the top → click <strong>Terminal</strong></li>
+        <li>A terminal panel will open at the bottom of the screen. Type the following commands and press Enter after each:
+          <pre>cd C:\PythonClass
+.\sync50.ps1</pre>
+        </li>
+        <li>The script will download your course materials — this may take 1–2 minutes</li>
+        <li>When you see <strong>Sync complete</strong>, you are done</li>
+      </ol>
+      <div class="callout warn">
+        ⚠ Make sure to <code>cd C:\PythonClass</code> first before running <code>.\sync50.ps1</code> — the script must be run from the <code>C:\PythonClass</code> folder.
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 10 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">10</div>
+      <div class="step-title">Verify Everything is Working</div>
+    </div>
+    <div class="step-body">
+      <p>After sync50.ps1 completes, look at the left panel in VS Code. You should see these folders:</p>
+      <pre>📁 classes
+   📁 08-31M
+   📁 09-02W
+   📁 09-07M
+   ... (and so on through December)
+📁 labs
+   📁 lab_01
+   📁 lab_02
+   📁 lab_03
+   📁 lab_04
+📁 sandbox</pre>
+      <div class="callout ok">
+        ✅ You're all set! Setup is complete. From now on, at the start of every class session,
+        simply double-click the <strong>OIM3600</strong> shortcut on your desktop and run
+        <code>.\sync50.ps1</code> from <code>C:\PythonClass</code> in the terminal to get the latest course materials.
+      </div>
+      <p style="margin-top:0.75rem;">You can also run the validation script at any time to confirm your environment is healthy:</p>
+      <pre>cd C:\PythonClass
+.\validate-env50.ps1</pre>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq">
+    <h2>🛠 Common Problems &amp; Solutions</h2>
+
+    <div class="faq-item">
+      <div class="q">❓ "I already have a GitHub account"</div>
+      <div class="a">You must create a new GitHub account specifically for this class using your Babson email and the username format <code>firstname-fall2026</code>. Your personal GitHub account cannot be used.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="q">❓ "My first name has a number or special character in it"</div>
+      <div class="a">Use only the letters of your first name. Remove any numbers, dots, or symbols. For example: <code>j0hn</code> → type <code>john</code>. If your name uses non-English characters, use the closest English letter equivalent.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="q">❓ "I forgot to unblock the zip before extracting"</div>
+      <div class="a">No problem — the setup script (setup50.ps1) automatically unblocks all files in C:\PythonClass as its first action. As long as you can run the script at all, the unblocking will be handled for you.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="q">❓ "gh student accept says no membership found"</div>
+      <div class="a">You need to accept the GitHub organization invitation before running this command. Check your Babson email for an invitation from GitHub to join Babson-Python-Fall2026 and click Accept. Then try the command again.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="q">❓ "gh student accept says the classroom or assignment is not found"</div>
+      <div class="a">Wait 2–3 minutes and try again. If it still fails, email your instructor with the full error message.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="q">❓ "sync50.ps1 says I don't have access or permission denied"</div>
+      <div class="a">You likely haven't completed Step 8 yet. Run <code>gh student accept Babson-Python-Fall2026 oim3600 intro</code> in PowerShell, then try sync50.ps1 again.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="q">❓ "I can't run as Administrator in Step 5"</div>
+      <div class="a">Your computer may be managed by Babson IT. Contact Babson IT Services or email your instructor before the first class.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="q">❓ "The OIM3600 shortcut is not on my Desktop"</div>
+      <div class="a">Phase 2 did not complete successfully. Close all windows and re-run Phase 2 from Step 6. Make sure you used <code>pwsh</code> (PowerShell 7) and not Windows PowerShell 5.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="q">❓ "I see an error when running .\setup50.ps1"</div>
+      <div class="a">Make sure you unblocked the zip before extracting (Step 4). Also make sure you ran the <code>Set-ExecutionPolicy</code> command in Step 5 before running <code>.\setup50.ps1</code>. If the error persists, take a screenshot and email your instructor.</div>
+    </div>
+  </div>
+
+  <footer>
+    OIM 3600 — Introduction to Python &nbsp;·&nbsp; Fall 2026 &nbsp;·&nbsp; Babson College<br>
+    Questions? Email your instructor before the first class.
+  </footer>
+
+</div>
+</body>
+</html>
